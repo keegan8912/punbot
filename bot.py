@@ -31,9 +31,6 @@ class Bot(commands.Bot):
             return
         await bot.handle_commands(ctx)
 
-        if "hello" in ctx.content.lower():
-            await ctx.channel.send(f"Hi, @{ctx.author.name}!")
-
     async def event_command_error(self, ctx, error):
         print("Caught exception, skipping")
         pass
@@ -44,7 +41,7 @@ class Bot(commands.Bot):
         await ctx.send(pun)
 
     def get_pun(self):
-        pun_gen_url = "https://v2.jokeapi.dev/joke/Pun?blacklistFlags=nsfw,religious,political,racist,sexist&type=single"
+        pun_gen_url = "https://v2.jokeapi.dev/joke/Pun?blacklistFlags=political,racist,sexist&type=single"
         request = requests.get(pun_gen_url)
         pun = request.json()["joke"]
         if len(pun) <= 1:
